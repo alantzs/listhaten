@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog | LH RECORDS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #080808; color: white; font-family: 'Inter', sans-serif; }
+        .font-dela { font-family: 'Dela Gothic One', cursive; text-transform: uppercase; }
+        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-16">
+            <a href="index.html" class="font-dela text-2xl italic text-purple-500">LH RECORDS</a>
+            <p class="text-[10px] font-black opacity-30 tracking-widest uppercase">Release Catalog</p>
+        </header>
+
+        <div id="catalog-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <div class="col-span-full text-center py-20 opacity-20 font-dela text-2xl animate-pulse">Синхронизация с облаком...</div>
+        </div>
+    </div>
+
+    <script>
+        const GIST_ID = 'fa4c360be07b1e3193d056fdd3bba88b';
+        async function loadCatalog() {
+            const res = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
+            const data = await res.json();
+            const db = JSON.parse(data.files['database.json'].content);
+            const grid = document.getElementById('catalog-grid');
+            grid.innerHTML = "";
+
+            Object.keys(db).forEach(id => {
+                if(id === 'users') return;
+                const t = db[id];
+                grid.innerHTML += `
+                    <a href="https://lh-link.mooo.com/index.html?track=${id}" target="_blank" class="group">
+                        <div class="glass p-4 rounded-[2rem] transition transform group-hover:-translate-y-2 group-hover:border-purple-500/50">
+                            <img src="${t.c}" class="w-full aspect-square object-cover rounded-[1.5rem] mb-4 shadow-xl">
+                            <h3 class="font-dela text-[12px] truncate">${t.t}</h3>
+                            <p class="text-purple-500 font-black text-[9px] uppercase mt-1 opacity-60">${t.a}</p>
+                        </div>
+                    </a>`;
+            });
+        }
+        loadCatalog();
+    </script>
+</body>
+</html>
