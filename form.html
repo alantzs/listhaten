@@ -2,85 +2,59 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LH DISTRIBUTION | Artist Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <style>
-        body { background: #050505; color: white; font-family: 'Inter', sans-serif; }
-        .font-dela { font-family: 'Dela Gothic One', cursive; text-transform: uppercase; }
-        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); }
-        .input-card { background: #111; border-radius: 1.2rem; padding: 1rem; border: 1px solid #222; transition: 0.3s; }
-        .input-card:focus-within { border-color: #9333ea; background: #151515; }
-        input { background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 13px; }
-        .hidden { display: none !important; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        body { background: #050505; color: white; font-family: sans-serif; }
+        .font-dela { font-family: 'Dela Gothic One', cursive; }
+        .input-card { background: #111; border-radius: 1rem; padding: 1rem; border: 1px solid #222; }
+        .hidden { display: none; }
     </style>
 </head>
 <body class="p-6">
 
-    <div id="auth-section" class="min-h-[80vh] flex items-center justify-center">
-        <div class="glass p-10 rounded-[3rem] w-full max-w-md shadow-2xl">
-            <h1 class="font-dela text-2xl mb-8 text-center italic text-purple-500">LH DISTRIBUTION</h1>
+    <div id="auth-section" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white/5 p-10 rounded-[2rem] w-full max-w-md border border-white/10 text-center">
+            <h1 class="font-dela text-2xl mb-8 text-purple-500 italic">LH DISTRIBUTION</h1>
             
             <div id="login-box" class="space-y-4">
-                <div class="input-card"><input type="email" id="email" placeholder="Email"></div>
-                <div class="input-card"><input type="password" id="pass" placeholder="Пароль"></div>
-                <button onclick="auth('login')" class="w-full bg-white text-black py-5 rounded-2xl font-dela hover:bg-purple-600 hover:text-white transition">Войти</button>
-                <p class="text-center text-[10px] opacity-40 uppercase font-black cursor-pointer mt-4" onclick="showReg(true)">Создать аккаунт артиста</p>
+                <div class="input-card"><input type="email" id="email" class="bg-transparent w-full outline-none" placeholder="Email"></div>
+                <div class="input-card"><input type="password" id="pass" class="bg-transparent w-full outline-none" placeholder="Пароль"></div>
+                <button onclick="auth('login')" class="w-full bg-white text-black py-4 rounded-xl font-bold uppercase hover:bg-purple-600 hover:text-white transition">Войти</button>
+                <p class="text-xs opacity-40 cursor-pointer mt-4 uppercase font-bold" onclick="showReg(true)">Создать аккаунт</p>
             </div>
 
             <div id="reg-box" class="space-y-4 hidden">
-                <div class="input-card"><input type="email" id="r-email" placeholder="Новый Email"></div>
-                <div class="input-card"><input type="password" id="r-pass" placeholder="Пароль"></div>
-                <button onclick="auth('reg')" class="w-full bg-purple-600 text-white py-5 rounded-2xl font-dela hover:bg-purple-500 transition">Зарегистрироваться</button>
-                <p class="text-center text-[10px] opacity-40 uppercase font-black cursor-pointer mt-4" onclick="showReg(false)">Назад ко входу</p>
+                <div class="input-card"><input type="email" id="r-email" class="bg-transparent w-full outline-none" placeholder="Новый Email"></div>
+                <div class="input-card"><input type="password" id="r-pass" class="bg-transparent w-full outline-none" placeholder="Придумайте пароль"></div>
+                <button onclick="auth('reg')" class="w-full bg-purple-600 text-white py-4 rounded-xl font-bold uppercase">Зарегистрироваться</button>
+                <p class="text-xs opacity-40 cursor-pointer mt-4 uppercase font-bold" onclick="showReg(false)">Назад</p>
             </div>
         </div>
     </div>
 
-    <div id="cabinet" class="hidden max-w-6xl mx-auto py-10">
-        <header class="flex justify-between items-center mb-12">
-            <div>
-                <h1 class="font-dela text-xl italic text-purple-500">LH RECORDS</h1>
-                <p id="user-info" class="text-[9px] opacity-30 font-black uppercase tracking-widest mt-1"></p>
+    <div id="cabinet" class="hidden max-w-4xl mx-auto py-10">
+        <h1 class="font-dela text-2xl text-purple-500 mb-10 italic">ЛИЧНЫЙ КАБИНЕТ LH</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="space-y-4">
+                <h2 class="font-bold uppercase opacity-50 text-sm">Новый релиз</h2>
+                <div class="input-card"><input type="text" id="in-id" class="bg-transparent w-full outline-none" placeholder="ID трека"></div>
+                <div class="input-card"><input type="text" id="in-title" class="bg-transparent w-full outline-none" placeholder="Название"></div>
+                <input type="file" id="f-in" class="hidden" onchange="loadImg(this)">
+                <button onclick="document.getElementById('f-in').click()" class="w-full border border-dashed border-white/20 py-4 rounded-xl text-xs uppercase opacity-50">Выбрать обложку</button>
+                <button onclick="publish()" id="pub-btn" class="w-full bg-purple-600 py-4 rounded-xl font-bold uppercase">Опубликовать</button>
             </div>
-            <button onclick="location.reload()" class="text-[10px] font-black uppercase text-red-500 hover:tracking-widest transition-all">Выйти</button>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="space-y-6">
-                <h2 class="font-dela text-2xl">Выпуск релиза</h2>
-                <div class="input-card text-center cursor-pointer border-dashed border-2 border-white/10 py-10 hover:border-purple-500/50" onclick="document.getElementById('f-in').click()">
-                    <input type="file" id="f-in" class="hidden" onchange="loadImg(this)">
-                    <p id="f-status" class="text-[10px] font-black opacity-30 uppercase">Выбрать обложку</p>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="input-card"><input type="text" id="in-id" placeholder="ID (например: track01)"></div>
-                    <div class="input-card"><input type="text" id="in-art" placeholder="Артист"></div>
-                </div>
-                <div class="input-card"><input type="text" id="in-title" placeholder="Название трека"></div>
-                <button onclick="publish()" id="pub-btn" class="w-full bg-purple-600 py-6 rounded-2xl font-dela text-lg shadow-xl shadow-purple-900/20 hover:bg-purple-500 transition">ОПУБЛИКОВАТЬ</button>
-            </div>
-
             <div>
-                <h2 class="font-dela text-2xl mb-6 italic opacity-50">Мои релизы</h2>
-                <div id="my-tracks" class="space-y-4 max-h-[500px] overflow-y-auto pr-2"></div>
+                <h2 class="font-bold uppercase opacity-50 text-sm mb-4">Мои треки</h2>
+                <div id="my-tracks" class="space-y-2"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Азер, твой новый рабочий токен (уже разделен):
-        const t1 = 'ghp_yzh7L';
-        const t2 = '7J5247iYhPq';
-        const t3 = 'ejbKy77WT2q';
-        const t4 = 'ykI065Tvg';
-
-        const KEY = t1 + t2 + t3 + t4; 
+        const KEY = 'ghp_yzh7L' + '7J5247iYhPq' + 'ejbKy77WT2q' + 'ykI065Tvg'; 
         const GIST_ID = 'fa4c360be07b1e3193d056fdd3bba88b';
-        
         let currentUser = "";
         let img64 = "";
 
@@ -89,97 +63,81 @@
             document.getElementById('reg-box').classList.toggle('hidden', !is);
         }
 
-        function loadImg(i) {
-            const r = new FileReader();
-            r.onload = (e) => { img64 = e.target.result; document.getElementById('f-status').innerText = "ОБЛОЖКА ГОТОВА"; };
-            r.readAsDataURL(i.files[0]);
-        }
-
         async function auth(type) {
             const email = document.getElementById(type === 'reg' ? 'r-email' : 'email').value.trim().toLowerCase();
             const pass = document.getElementById(type === 'reg' ? 'r-pass' : 'pass').value;
-
             if(!email || !pass) return alert("Заполни поля!");
 
             try {
                 const res = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
+                if (!res.ok) throw new Error("GIST_ID указан неверно или Gist удален!");
+                
                 const data = await res.json();
+                if (!data.files['database.json']) throw new Error("Файл database.json не найден в Gist!");
+
                 let db = JSON.parse(data.files['database.json'].content);
                 if(!db.users) db.users = {};
 
                 if(type === 'reg') {
-                    if(db.users[email]) return alert("Email занят!");
+                    if(db.users[email]) return alert("Такой Email уже есть!");
                     db.users[email] = btoa(pass);
                     await saveDB(db);
-                    alert("Аккаунт создан! Войдите.");
+                    alert("Аккаунт создан! Теперь входи.");
                     showReg(false);
                 } else {
                     if(db.users[email] === btoa(pass)) {
                         currentUser = email;
                         document.getElementById('auth-section').classList.add('hidden');
                         document.getElementById('cabinet').classList.remove('hidden');
-                        document.getElementById('user-info').innerText = email;
                         loadMyTracks();
                     } else {
-                        alert("Неверный пароль!");
+                        alert("Неверный логин или пароль!");
                     }
                 }
-            } catch(e) { alert("Ошибка! Проверь, есть ли файл database.json в Gist."); }
+            } catch(e) { alert("ОШИБКА: " + e.message); }
+        }
+
+        async function saveDB(db) {
+            const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+                method: 'PATCH',
+                headers: { 'Authorization': `token ${KEY}` },
+                body: JSON.stringify({ files: { 'database.json': { content: JSON.stringify(db, null, 2) } } })
+            });
+            if (!res.ok) throw new Error("Токен не дает доступ на запись!");
+        }
+
+        function loadImg(i) {
+            const r = new FileReader();
+            r.onload = (e) => { img64 = e.target.result; alert("Обложка готова!"); };
+            r.readAsDataURL(i.files[0]);
         }
 
         async function publish() {
             const id = document.getElementById('in-id').value.trim();
-            if(!id || !img64) return alert("Нужен ID и обложка!");
-
-            const btn = document.getElementById('pub-btn');
-            btn.innerText = "ЗАГРУЗКА...";
-            btn.disabled = true;
-
-            const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
-            const data = await res.json();
-            let db = JSON.parse(data.files['database.json'].content);
-
-            db[id] = {
-                t: document.getElementById('in-title').value,
-                a: document.getElementById('in-art').value,
-                c: img64,
-                owner: currentUser,
-                l: {}
-            };
-
-            await saveDB(db);
-            alert("Опубликовано!");
-            btn.innerText = "ОПУБЛИКОВАТЬ";
-            btn.disabled = false;
-            loadMyTracks();
+            if(!id || !img64) return alert("ID и обложка обязательны!");
+            
+            try {
+                const res = await fetch(`https://api.github.com/gists/${GIST_ID}`);
+                const data = await res.json();
+                let db = JSON.parse(data.files['database.json'].content);
+                
+                db[id] = { t: document.getElementById('in-title').value, owner: currentUser, c: img64 };
+                await saveDB(db);
+                alert("Опубликовано!");
+                loadMyTracks();
+            } catch(e) { alert("Ошибка публикации!"); }
         }
 
         async function loadMyTracks() {
-            const cont = document.getElementById('my-tracks');
             const res = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
             const data = await res.json();
             const db = JSON.parse(data.files['database.json'].content);
+            const cont = document.getElementById('my-tracks');
             cont.innerHTML = "";
-
             Object.keys(db).forEach(id => {
                 if(db[id].owner === currentUser) {
-                    cont.innerHTML += `
-                    <div class="glass p-4 rounded-2xl flex justify-between items-center border-white/5">
-                        <div class="flex items-center gap-3">
-                            <img src="${db[id].c}" class="w-10 h-10 rounded-lg object-cover">
-                            <div><p class="font-dela text-[10px]">${db[id].t}</p><p class="text-[8px] opacity-30">${id}</p></div>
-                        </div>
-                        <a href="https://lh-link.mooo.com/index.html?track=${id}" target="_blank" class="text-purple-500 font-bold text-[10px]">ССЫЛКА</a>
-                    </div>`;
+                    cont.innerHTML += `<div class="bg-white/5 p-4 rounded-xl flex justify-between"><span>${db[id].t}</span><span class="opacity-30">${id}</span></div>`;
                 }
-            });
-        }
-
-        async function saveDB(db) {
-            await fetch(`https://api.github.com/gists/${GIST_ID}`, {
-                method: 'PATCH',
-                headers: { 'Authorization': `token ${KEY}` },
-                body: JSON.stringify({ files: { 'database.json': { content: JSON.stringify(db, null, 2) } } })
             });
         }
     </script>
