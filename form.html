@@ -2,123 +2,94 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>LH DISTRIBUTION | Artist Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM | LH RECORDS</title>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <style>
-        body { background: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .font-dela { font-family: 'Dela Gothic One', cursive; text-transform: uppercase; }
-        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); }
-        .input-card { background: #111; border-radius: 1.2rem; padding: 1rem; border: 1px solid #222; }
-        .hidden { display: none !important; }
-        /* Стили для скрытия скролла iframe */
-        iframe { border: none; border-radius: 20px; background: white; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #000;
+            font-family: 'Dela Gothic One', cursive;
+            overflow: hidden;
+        }
+        
+        .header {
+            height: 60px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid #a020f0;
+            box-shadow: 0 0 15px rgba(160, 32, 240, 0.5);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 20px;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            position: absolute;
+            top: 60px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Анимация неона для заголовка */
+        .neon-text {
+            animation: neon 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon {
+            from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #a020f0; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #a020f0, 0 0 30px #a020f0; }
+        }
+
+        /* Декор по бокам */
+        .side-line {
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: #a020f0;
+            top: 0;
+            box-shadow: 0 0 10px #a020f0;
+        }
+        .left { left: 0; }
+        .right { right: 0; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body>
 
-    <div id="auth-section" class="min-h-[90vh] flex items-center justify-center">
-        <div class="glass p-10 rounded-[3rem] w-full max-w-md shadow-2xl text-center border-purple-500/20">
-            <h1 class="font-dela text-2xl mb-8 italic text-purple-500">LH DISTRIBUTION</h1>
-            
-            <div id="login-box" class="space-y-4">
-                <div class="input-card"><input type="email" id="email" class="bg-transparent w-full outline-none" placeholder="Email"></div>
-                <div class="input-card"><input type="password" id="pass" class="bg-transparent w-full outline-none" placeholder="Пароль"></div>
-                <button onclick="auth('login')" class="w-full bg-white text-black py-5 rounded-2xl font-dela hover:bg-purple-600 hover:text-white transition">Войти</button>
-                <p class="text-[10px] opacity-40 uppercase font-black cursor-pointer mt-4" onclick="showReg(true)">Создать аккаунт артиста</p>
-            </div>
+    <div class="side-line left"></div>
+    <div class="side-line right"></div>
 
-            <div id="reg-box" class="space-y-4 hidden">
-                <div class="input-card"><input type="email" id="r-email" class="bg-transparent w-full outline-none" placeholder="Новый Email"></div>
-                <div class="input-card"><input type="password" id="r-pass" class="bg-transparent w-full outline-none" placeholder="Придумайте пароль"></div>
-                <button onclick="auth('reg')" class="w-full bg-purple-600 text-white py-5 rounded-2xl font-dela">Зарегистрироваться</button>
-                <p class="text-[10px] opacity-40 uppercase font-black cursor-pointer mt-4" onclick="showReg(false)">Назад</p>
-            </div>
-        </div>
+    <div class="header">
+        <h1 class="neon-text">MUSIC FORM</h1>
     </div>
 
-    <div id="cabinet" class="hidden max-w-6xl mx-auto">
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h1 class="font-dela text-xl italic text-purple-500">LH RECORDS</h1>
-                <p id="user-info" class="text-[10px] opacity-30 font-bold uppercase"></p>
-            </div>
-            <button onclick="location.reload()" class="text-[10px] font-black text-red-500 uppercase">Выход</button>
-        </header>
-
-        <div class="grid grid-cols-1 gap-8">
-            <div id="form-container" class="space-y-6">
-                <div class="flex justify-between items-center">
-                    <h2 class="font-dela text-2xl">Выпуск релиза</h2>
-                    <button onclick="toggleForm()" id="form-btn" class="bg-purple-600 px-6 py-2 rounded-full text-[10px] font-black uppercase">Открыть форму заявки</button>
-                </div>
-                
-                <div id="iframe-wrapper" class="hidden w-full h-[800px] glass p-2 rounded-[2.5rem]">
-                    <iframe src="https://pw7psllh.forms.app/sentablemusic" width="100%" height="100%"></iframe>
-                </div>
-            </div>
-
-            <div class="border-t border-white/5 pt-8">
-                <h2 class="font-dela text-xl opacity-40 mb-4">Статус моих заявок</h2>
-                <p class="text-xs opacity-20 uppercase font-bold italic">Здесь будут отображаться одобренные релизы после модерации...</p>
-            </div>
-        </div>
+    <div class="container">
+        <iframe src="https://nni6qoo2.forms.app/sentablemusic" 
+                allow="geolocation; microphone; camera; payment" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+        </iframe>
     </div>
 
-    <script>
-        const KEY = 'ghp_yzh7L' + '7J5247iYhPq' + 'ejbKy77WT2q' + 'ykI065Tvg'; 
-        const GIST_ID = 'fa4c360be07b1e3193d056fdd3bba88b';
-        let currentUser = "";
-
-        function showReg(is) {
-            document.getElementById('login-box').classList.toggle('hidden', is);
-            document.getElementById('reg-box').classList.toggle('hidden', !is);
-        }
-
-        function toggleForm() {
-            const wrap = document.getElementById('iframe-wrapper');
-            const btn = document.getElementById('form-btn');
-            wrap.classList.toggle('hidden');
-            btn.innerText = wrap.classList.contains('hidden') ? "Открыть форму заявки" : "Скрыть форму";
-        }
-
-        async function auth(type) {
-            const email = document.getElementById(type === 'reg' ? 'r-email' : 'email').value.trim().toLowerCase();
-            const pass = document.getElementById(type === 'reg' ? 'r-pass' : 'pass').value;
-            if(!email || !pass) return alert("Заполни поля!");
-
-            try {
-                const res = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
-                const data = await res.json();
-                let db = JSON.parse(data.files['database.json'].content);
-                if(!db.users) db.users = {};
-
-                if(type === 'reg') {
-                    if(db.users[email]) return alert("Email занят!");
-                    db.users[email] = btoa(pass);
-                    await saveDB(db);
-                    alert("Успешно! Теперь войдите.");
-                    showReg(false);
-                } else {
-                    if(db.users[email] === btoa(pass)) {
-                        currentUser = email;
-                        document.getElementById('auth-section').classList.add('hidden');
-                        document.getElementById('cabinet').classList.remove('hidden');
-                        document.getElementById('user-info').innerText = "Артист: " + email;
-                    } else {
-                        alert("Неверный логин или пароль!");
-                    }
-                }
-            } catch(e) { alert("Ошибка базы данных! Проверь database.json в Gist."); }
-        }
-
-        async function saveDB(db) {
-            await fetch(`https://api.github.com/gists/${GIST_ID}`, {
-                method: 'PATCH',
-                headers: { 'Authorization': `token ${KEY}` },
-                body: JSON.stringify({ files: { 'database.json': { content: JSON.stringify(db, null, 2) } } })
-            });
-        }
-    </script>
 </body>
 </html>
