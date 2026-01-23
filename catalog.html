@@ -2,50 +2,80 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Catalog | LH RECORDS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATALOG | LH RECORDS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #080808; color: white; font-family: 'Inter', sans-serif; }
+        body { background: #050505; color: white; font-family: 'Inter', sans-serif; }
         .font-dela { font-family: 'Dela Gothic One', cursive; text-transform: uppercase; }
-        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-card:hover { 
+            background: rgba(255, 255, 255, 0.05); 
+            border-color: #a855f7;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .bg-glow { background: radial-gradient(circle at top right, #2e1065 0%, #050505 50%); }
     </style>
 </head>
-<body class="p-8">
-    <div class="max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-16">
-            <a href="index.html" class="font-dela text-2xl italic text-purple-500">LH RECORDS</a>
-            <p class="text-[10px] font-black opacity-30 tracking-widest uppercase">Release Catalog</p>
-        </header>
+<body class="min-h-screen bg-glow p-8">
 
-        <div id="catalog-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <div class="col-span-full text-center py-20 opacity-20 font-dela text-2xl animate-pulse">Синхронизация с облаком...</div>
+    <nav class="max-w-6xl mx-auto flex justify-between items-center mb-16">
+        <a href="index.html" class="font-dela text-2xl tracking-tighter">LH <span class="text-purple-500">REC</span></a>
+        <a href="index.html" class="opacity-40 hover:opacity-100 transition text-xs font-bold uppercase tracking-widest border-b border-transparent hover:border-white">Назад</a>
+    </nav>
+
+    <main class="max-w-6xl mx-auto">
+        <div class="flex items-baseline gap-4 mb-12">
+            <h2 class="font-dela text-4xl italic">Каталог</h2>
+            <span class="opacity-30 font-dela text-sm">4 релизов</span>
         </div>
-    </div>
 
-    <script>
-        const GIST_ID = 'fa4c360be07b1e3193d056fdd3bba88b';
-        async function loadCatalog() {
-            const res = await fetch(`https://api.github.com/gists/${GIST_ID}?t=${Date.now()}`);
-            const data = await res.json();
-            const db = JSON.parse(data.files['database.json'].content);
-            const grid = document.getElementById('catalog-grid');
-            grid.innerHTML = "";
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <a href="/starfunk" class="glass-card p-4 rounded-3xl group">
+                <div class="relative overflow-hidden rounded-2xl aspect-square mb-4">
+                    <img src="starfunk_cover.jpg" alt="STAR FUNK" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/400?text=STAR+FUNK'">
+                </div>
+                <h3 class="font-dela text-lg leading-tight mb-1">STAR FUNK</h3>
+                <p class="opacity-40 text-[10px] uppercase tracking-tighter">REPOSIK, $onik play</p>
+            </a>
 
-            Object.keys(db).forEach(id => {
-                if(id === 'users') return;
-                const t = db[id];
-                grid.innerHTML += `
-                    <a href="https://lh-link.mooo.com/index.html?track=${id}" target="_blank" class="group">
-                        <div class="glass p-4 rounded-[2rem] transition transform group-hover:-translate-y-2 group-hover:border-purple-500/50">
-                            <img src="${t.c}" class="w-full aspect-square object-cover rounded-[1.5rem] mb-4 shadow-xl">
-                            <h3 class="font-dela text-[12px] truncate">${t.t}</h3>
-                            <p class="text-purple-500 font-black text-[9px] uppercase mt-1 opacity-60">${t.a}</p>
-                        </div>
-                    </a>`;
-            });
-        }
-        loadCatalog();
-    </script>
+            <a href="/foolfunk" class="glass-card p-4 rounded-3xl group">
+                <div class="relative overflow-hidden rounded-2xl aspect-square mb-4">
+                    <img src="foolfunk_cover.jpg" alt="FOOL FUNK" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/400?text=FOOL+FUNK'">
+                </div>
+                <h3 class="font-dela text-lg leading-tight mb-1">FOOL FUNK</h3>
+                <p class="opacity-40 text-[10px] uppercase tracking-tighter">Release</p>
+            </a>
+
+            <a href="/no-pares.html" class="glass-card p-4 rounded-3xl group">
+                <div class="relative overflow-hidden rounded-2xl aspect-square mb-4">
+                    <img src="no-pares_cover.jpg" alt="NO PARES" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/400?text=NO+PARES'">
+                </div>
+                <h3 class="font-dela text-lg leading-tight mb-1">NO PARES</h3>
+                <p class="opacity-40 text-[10px] uppercase tracking-tighter">Release</p>
+            </a>
+
+            <a href="/fast" class="glass-card p-4 rounded-3xl group">
+                <div class="relative overflow-hidden rounded-2xl aspect-square mb-4">
+                    <img src="fast_cover.jpg" alt="FAST" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://via.placeholder.com/400?text=FAST'">
+                </div>
+                <h3 class="font-dela text-lg leading-tight mb-1">FAST</h3>
+                <p class="opacity-40 text-[10px] uppercase tracking-tighter">Release</p>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="mt-32 text-center opacity-20 text-[10px] font-black uppercase tracking-[0.5em] pb-8">
+        LH RECORDS STRUCTURE © 2026
+    </footer>
+
 </body>
 </html>
