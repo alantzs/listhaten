@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LH LINKS | Сервис от Listhaten</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #000; --accent: #fff; --text-dim: #888; }
+        body { background: var(--bg); color: #fff; font-family: 'Dela Gothic One', cursive; margin: 0; padding: 60px 20px; }
+        
+        .container { max-width: 600px; margin: 0 auto; }
+        
+        /* Навигация */
+        nav { position: absolute; top: 20px; right: 20px; }
+        nav a { color: var(--text-dim); text-decoration: none; margin-left: 20px; font-size: 0.7rem; transition: 0.3s; }
+        nav a.active { color: #fff; border-bottom: 1px solid #fff; }
+
+        h1 { font-size: 2.5rem; letter-spacing: -2px; margin-bottom: 40px; }
+
+        /* Контакты */
+        .section { margin-bottom: 50px; }
+        .section-title { color: var(--text-dim); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
+        .contact-link { display: block; color: #fff; text-decoration: none; font-size: 1.1rem; margin-bottom: 10px; transition: 0.3s; }
+        .contact-link:hover { color: var(--text-dim); }
+
+        /* Новости / Био */
+        .news-card { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 25px; border-radius: 2px; margin-bottom: 20px; }
+        .news-tag { color: var(--text-dim); font-size: 0.5rem; margin-bottom: 10px; display: block; }
+        .news-card p { font-family: sans-serif; line-height: 1.6; color: #ccc; font-size: 0.9rem; margin: 0; }
+        .author { display: block; margin-top: 15px; font-size: 0.7rem; color: #fff; text-transform: uppercase; }
+
+        hr { border: 0; border-top: 1px solid #1a1a1a; margin: 40px 0; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/">ГЛАВНАЯ</a>
+    <a href="/lhlinks" class="active">ЛИНКС</a>
+</nav>
+
+<div class="container">
+    <div class="section">
+        <h1 style="color: var(--accent);">LH LINKS</h1>
+        <div class="section-title">Contacts</div>
+        <a href="mailto:github_user_on@proton.me" class="contact-link">github_user_on@proton.me</a>
+        <a href="https://t.me/managerfeykins" target="_blank" class="contact-link">@managerfeykins</a>
+    </div>
+
+    <hr>
+
+    <div class="section">
+        <div class="section-title">News</div>
+        
+        <div class="news-card">
+            <span class="news-tag">WEB PRODUCTION</span>
+            <p>LH LINKS масштабируется. Теперь мы не просто создаем смартлинки для артистов, мы проектируем цифровое пространство. Вы можете заказать разработку кастомного сайта, написав на нашу официальную почту. Ваш стиль — наша реализация.</p>
+            <span class="author">By FEYKINS (Фейкинс)</span>
+        </div>
+
+        <div class="news-card">
+            <span class="news-tag">RECORDS / PHILOSOPHY</span>
+            <p>LH RECORDS — это больше, чем лейбл. Это экосистема для тех, кто создает вне рамок. Мы объединяем звук, визуальный код и технологии, чтобы каждый дроп становился событием. Мы не ищем формат, мы создаем его сами.</p>
+            <span class="author">By FEYKINS (Фейкинс)</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
