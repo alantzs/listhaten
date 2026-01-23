@@ -7,13 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: white; font-family: 'Inter', sans-serif; }
+        body { background: #050505; color: white; font-family: 'Inter', sans-serif; overflow: hidden; }
         .font-dela { font-family: 'Dela Gothic One', cursive; text-transform: uppercase; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .hero-gradient { background: radial-gradient(circle at center, #4c1d95 0%, #050505 70%); }
+        
+        /* Стили для навигации */
+        .nav-link {
+            font-family: 'Dela Gothic One', cursive;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            opacity: 0.4;
+        }
+        .nav-link:hover { opacity: 1; color: #a855f7; }
+        .nav-link.active { opacity: 1; border-bottom: 2px solid white; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-6 hero-gradient">
+
+    <nav class="absolute top-8 right-8 flex gap-8 z-50">
+        <a href="index.html" class="nav-link active">ГЛАВНАЯ</a>
+        <a href="lhlinks.html" class="nav-link">ЛИНКС</a>
+    </nav>
+
     <div class="text-center space-y-12 animate-in fade-in zoom-in duration-700">
         <h1 class="font-dela text-6xl md:text-8xl italic tracking-tighter leading-none">LH<br>RECORDS</h1>
         <p class="opacity-40 text-xs md:text-sm uppercase tracking-[0.5em] font-black">Music Distribution & Production</p>
@@ -25,7 +42,7 @@
     </div>
 
     <footer class="absolute bottom-8 opacity-20 text-[10px] font-black uppercase tracking-widest">
-        Created by LH RECORDS © 2026
+        Created by LH RECORDS © 2026 | Designed by FEYKINS
     </footer>
 </body>
 </html>
